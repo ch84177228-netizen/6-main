@@ -79,6 +79,17 @@ s.post(tap: .cghidEventTap)
     subprocess.run(['swift', '-e', swift_code])
     time.sleep(0.3)
 
+def scroll_up(x, y, amount=300):
+    swift_code = f'''
+import CoreGraphics
+let src = CGEventSource(stateID: .hidSystemState)
+let s = CGEvent(scrollWheelEvent2Source: src, units: .pixel, wheelCount: 1, wheel1: {amount}, wheel2: 0, wheel3: 0)!
+s.location = CGPoint(x: {int(x)}, y: {int(y)})
+s.post(tap: .cghidEventTap)
+'''
+    subprocess.run(['swift', '-e', swift_code])
+    time.sleep(0.3)
+
 def type_text(text):
     process = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
     process.communicate(text.encode('utf-8'))
@@ -197,8 +208,13 @@ def _do_publish(folder, data, images, account_name, first=False):
         full_content += '\n' + data['话题']
     type_text(full_content)
 
-    # 8. 上传图片
+    # 8. 上传图片（先移到空白处、滑到顶端，再点加号）
     print("  🖼  上传图片...")
+    move_mouse(*POS_BLANK)
+    time.sleep(0.5)
+    for _ in range(10):
+        scroll_up(POS_BLANK[0], POS_BLANK[1], 300)
+    time.sleep(0.5)
     click(*POS_ADD_IMG, delay=0.5)
     time.sleep(0.5)
     click(*POS_ADD_IMG)
