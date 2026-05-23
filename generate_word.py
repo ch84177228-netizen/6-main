@@ -82,6 +82,22 @@ def add_body_lines(doc, text, size=11):
         else:
             run.font.color.rgb = C.DARK
 
+def write_txt(content, out_path):
+    """写入txt文件"""
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    with open(out_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    print(f'  ✅ {os.path.basename(out_path)}')
+
+def make_txt_06(title, body, topics, xhs_account, gzh_account, folder, filename_base):
+    """06文件夹：同时生成小红书txt和公众号txt"""
+    tmpl = '标题：{title}\n\n正文：\n{body}\n\n话题：{topics}\n\n时间：\n\n账号：{account}\n'
+    base = f'/home/user/6-main/{folder}'
+    write_txt(tmpl.format(title=title, body=body, topics=topics, account=xhs_account),
+              f'{base}/{filename_base}_小红书.txt')
+    write_txt(tmpl.format(title=title, body=body, topics=topics, account=gzh_account),
+              f'{base}/{filename_base}_公众号.txt')
+
 def add_footer_info(doc, topics, account, gray=C.GRAY):
     add_hr(doc)
     add_colored_para(doc, f'话题：{topics}', gray, size=9)
@@ -209,11 +225,10 @@ BASE = '/home/user/6-main'
 def main():
     print('\n开始生成Word文档...\n')
 
-    # ── 06 公务员 ──
+    # ── 06 公务员（每篇生成：小红书txt + 公众号txt + Word）──
     print('📁 06-公务员')
-    make_word_standard(
-        title   = '申论到底考什么？很多人连题型都没搞清楚',
-        body    = '''很多人备考申论，一上来就买教材刷题。
+    _06_title  = '申论到底考什么？很多人连题型都没搞清楚'
+    _06_body   = '''很多人备考申论，一上来就买教材刷题。
 但连申论考什么都没搞清楚，刷再多题也白费。📚
 
 申论说难，其实不难。
@@ -256,11 +271,20 @@ def main():
 是方向错了，方法没对。
 先把4种题型搞清楚，再按顺序刷，才是正确节奏。🌱
 
-我整理了一份适合考公小白的入门资料包，需要可以私信：考公资料。''',
-        topics  = '#考公 #公务员考试 #国考 #省考 #考公小白 #公考备考 #申论 #申论备考 #考公资料',
-        account = '06红书店铺 | 考公学姐',
-        out_path= f'{BASE}/06-公务员/考公文案_06_申论题型科普.docx',
-        title_color=C.RED,
+我整理了一份适合考公小白的入门资料包，需要可以私信：考公资料。'''
+    _06_topics = '#考公 #公务员考试 #国考 #省考 #考公小白 #公考备考 #申论 #申论备考 #考公资料'
+    _06_xhs    = '06红书店铺 | 考公学姐'
+    _06_gzh    = '13公众号|05粉色手机'
+
+    make_txt_06(_06_title, _06_body, _06_topics, _06_xhs, _06_gzh,
+                '06-公务员', '考公文案_06_申论题型科普')
+    make_word_standard(
+        title      = _06_title,
+        body       = _06_body,
+        topics     = _06_topics,
+        account    = _06_xhs,
+        out_path   = f'{BASE}/06-公务员/考公文案_06_申论题型科普.docx',
+        title_color= C.RED,
     )
 
     # ── 05 CPA税法 大号 ──
