@@ -8,7 +8,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 BASE   = '/home/user/6-main'
 SRC    = f'{BASE}/01-6个主号内容创作/长期股权投资转换_6账号发布文案'
-TXTDIR = f'{SRC}/11条发布文案'
+TXTDIR = f'{SRC}/发布文案'
 WPATH  = f'{SRC}/长期股权投资转换_11篇完整稿件.docx'
 TMPL   = '标题：{title}\n\n正文：\n{body}\n\n话题：{topics}\n\n时间：\n\n账号：{account}\n'
 
@@ -855,13 +855,79 @@ doc.save(WPATH)
 print(f'  ✅ {os.path.basename(WPATH)}')
 
 # ══════════════════════════════════════════════
-# 生成11个编号txt
+# 生成27个txt（11个文件夹）
 # ══════════════════════════════════════════════
-print('\n📁 生成11个编号txt...')
-os.makedirs(TXTDIR, exist_ok=True)
-for a in articles:
-    content = TMPL.format(title=a['title'], body=a['bs'],
-                          topics=a['topics'], account=a['account'])
-    write_txt(content, f"{TXTDIR}/{a['num']}.txt")
+print('\n📁 生成27个txt（11个文件夹）...')
 
-print(f'\n✅ 完成：1个Word + 11个txt')
+def t(title, body, topics, account):
+    return TMPL.format(title=title, body=body, topics=topics, account=account)
+
+# 账号配置
+XHS = ['06红书店铺|粉色手机','06红书店铺|黄色手机','06红书店铺|蓝色ipad张菊芳',
+       '06红书店铺|孙文新134 已实名','06红书店铺|孙文新 小号店铺号','06红书店铺|姗姗已实名']
+DY  = ['07抖音发作品|01蓝色','07抖音发作品|02粉色西瓜','07抖音发作品|03黄色',
+       '07抖音发作品|04粉色糖糖','07抖音发作品|05吴学安手机号']
+SP  = ['04视频号|01主账号黄色手机','04视频号|02诗雨vip','04视频号|03蓝色手机',
+       '04视频号|04孙文礼','04视频号|05胡芝兰','04视频号|06吴学安']
+GZH = ['13公众号|01蓝色密码','13公众号|02VIPSun','13公众号|03黄色手机','13公众号|04吴学安']
+
+folders = ['第1组_主号诗雨学姐','第2组_副号1学生视角','第3组_副号2干货速记',
+           '第4组_副号3避坑吐槽','第5组_副号4考点总结','第6组_副号5考前冲刺']
+
+main_arts = articles[:6]  # 01-06 → 6组账号
+
+for i, a in enumerate(main_arts):
+    fd = f'{TXTDIR}/{folders[i]}'
+    os.makedirs(fd, exist_ok=True)
+    ti, bo, tp = a['title'], a['bs'], a['topics']
+
+    # 小红书（全6组）
+    xn = XHS[i].split('|')[1]
+    write_txt(t(ti,bo,tp,XHS[i]), f'{fd}/2_小红书_{xn}.txt')
+    # 抖音（第1-5组）
+    if i < 5:
+        dn = DY[i].split('|')[1]
+        write_txt(t(ti,bo,tp,DY[i]), f'{fd}/1_抖音_{dn}.txt')
+    # 视频号（全6组）
+    sn = SP[i].split('|')[1]
+    write_txt(t(ti,bo,tp,SP[i]), f'{fd}/4_视频号_{sn}.txt')
+    # 公众号（第1-4组）
+    if i < 4:
+        gn = GZH[i].split('|')[1]
+        write_txt(t(ti,bo,tp,GZH[i]), f'{fd}/13_公众号_{gn}.txt')
+
+# 02-会计科普（article 07）
+a07 = articles[6]
+fd07 = f'{TXTDIR}/02-会计科普'; os.makedirs(fd07, exist_ok=True)
+write_txt(t(a07['title'],a07['bs'],a07['topics'],'06红书店铺|胡志兰手机'),
+          f'{fd07}/2_小红书_胡志兰手机.txt')
+
+# 03-初级专业号（article 08）
+a08 = articles[7]
+fd08 = f'{TXTDIR}/03-初级专业号'; os.makedirs(fd08, exist_ok=True)
+write_txt(t(a08['title'],a08['bs'],a08['topics'],'06红书店铺|孙咏美1530521'),
+          f'{fd08}/2_小红书_孙咏美1530521.txt')
+
+# 04-注会专业号（article 09，完整版）
+a09 = articles[8]
+fd09 = f'{TXTDIR}/04-注会专业号'; os.makedirs(fd09, exist_ok=True)
+write_txt(t(a09['title'],a09['bs'],a09['topics'],'06红书店铺｜姗姗 店铺大号'),
+          f'{fd09}/完整版_姗姗店铺大号.txt')
+
+# 05-CPA税法（article 10，大号）
+a10 = articles[9]
+fd10 = f'{TXTDIR}/05-CPA税法'; os.makedirs(fd10, exist_ok=True)
+write_txt(t(a10['title'],a10['bs'],a10['topics'],'06红书店铺｜姗姗 店铺大号'),
+          f'{fd10}/大号_姗姗店铺大号.txt')
+
+# 06-公务员（article 11，小红书+公众号）
+a11 = articles[10]
+fd11 = f'{TXTDIR}/06-公务员'; os.makedirs(fd11, exist_ok=True)
+write_txt(t(a11['title'],a11['bs'],a11['topics'],'06红书店铺 | 考公学姐'),
+          f'{fd11}/2_小红书_考公学姐.txt')
+write_txt(t(a11['title'],a11['bs'],a11['topics'],'13公众号|05粉色手机'),
+          f'{fd11}/13_公众号_05粉色手机.txt')
+
+# 统计
+total = sum(len(os.listdir(f'{TXTDIR}/{d}')) for d in os.listdir(TXTDIR) if os.path.isdir(f'{TXTDIR}/{d}'))
+print(f'\n✅ 完成：1个Word + {total}个txt（11个文件夹）')
