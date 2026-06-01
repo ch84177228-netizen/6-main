@@ -237,7 +237,7 @@ G = [
     ('第5组_副号4考点总结', '收入确认核心考点｜收藏这一篇就够了', S05, TP5,
      '07抖音发作品|05吴学安手机号', '06红书店铺|孙文新 小号店铺号', '04视频号|05胡芝兰', None),
     ('第6组_副号5考前冲刺', '距中级考试105天，收入确认今天搞定', S06, TP6,
-     None, '06红书店铺|姗姗已实名', '04视频号|06吴学安', None),
+     '07抖音发作品|06蓝色', '06红书店铺|姗姗已实名', '04视频号|06吴学安', None),
 ]
 
 records = []
@@ -288,7 +288,7 @@ if errors:
     raise SystemExit(1)
 
 # 打包zip
-zip_path = f'{BASE}/收入确认_27账号发布文案.zip'
+zip_path = f'{BASE}/收入确认_28账号发布文案.zip'
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
     for root, dirs, files in os.walk(OUTDIR):
         for file in sorted(files):
