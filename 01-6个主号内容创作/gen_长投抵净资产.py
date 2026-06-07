@@ -259,7 +259,7 @@ groups = [
      "07抖音发作品|08文新","06红书店铺|姗姗 店铺大号",None,None),
     (9,  "第9组_柯南故事号",      T9,  B9,  P9,  True,  False, False,
      "07抖音发作品|09专业号","06红书店铺|西瓜学姐",None,None),
-    (10, "第10组_西游记故事号2",  T10, B10, P10, True,  False, False,
+    (10, "第10组_西游记故事号2",  T10, B10, P10, False, False, False,
      "07抖音发作品|999学霸","06红书店铺|会计漫画",None,None),
     (11, "第11组_小新故事号2",    T11, B11, P11, False, False, False,
      None,"06红书店铺|樱桃学姐",None,None),
