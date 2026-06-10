@@ -1465,10 +1465,15 @@ def make_word(accounts, doc_title, filename):
     doc = Document()
     doc.add_heading(doc_title, 0)
     for section_title, title, content in accounts:
+        lines = content.strip().split('\n')
+        lines = [l for l in lines if not l.strip().startswith(('标题1：', '标题2：', '标题3：', '标题4：', '标题5：'))]
+        while lines and not lines[0].strip():
+            lines.pop(0)
+        cleaned = '\n'.join(lines)
         doc.add_heading(section_title, 1)
         p = doc.add_paragraph(f"已选标题：{title}")
         p.runs[0].bold = True
-        doc.add_paragraph(content.strip())
+        doc.add_paragraph(cleaned)
         doc.add_paragraph("")
     word_path = os.path.join(BASE, filename)
     doc.save(word_path)
