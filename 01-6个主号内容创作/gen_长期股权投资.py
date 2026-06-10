@@ -1466,7 +1466,7 @@ def make_word(accounts, doc_title, filename):
     doc.add_heading(doc_title, 0)
     for section_title, title, content in accounts:
         doc.add_heading(section_title, 1)
-        p = doc.add_paragraph(f"标题（txt用）：{title}")
+        p = doc.add_paragraph(f"已选标题：{title}")
         p.runs[0].bold = True
         doc.add_paragraph(content.strip())
         doc.add_paragraph("")
