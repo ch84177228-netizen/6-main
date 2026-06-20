@@ -13,7 +13,7 @@ os.makedirs(BASE, exist_ok=True)
 articles = [
     # ===== 第1组 主号 =====
     {
-        "no": 1, "platform": "抖音",
+        "no": 1, "group": "第1组_主号", "platform": "抖音",
         "account": "07抖音发作品|01蓝色",
         "title": "备考八个月才发现知识全是散的",
         "body": (
