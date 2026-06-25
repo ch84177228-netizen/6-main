@@ -1218,7 +1218,7 @@ groups = [
     (9,  "第9组_治愈猫咪插图号", T9,  B9,  P9,  True,  False, False,
      "07抖音发作品|09专业号","06红书店铺|西瓜学姐",None,None),
     (10, "第10组_西游记故事号2", T10, B10, P10, False, False, False,
-     "07抖音发作品|999学霸","06红书店铺|会计漫画",None,None),
+     None,"06红书店铺|会计漫画",None,None),
     (11, "第11组_小新故事号2",   T11, B11, P11, False, False, False,
      None,"06红书店铺|樱桃学姐",None,None),
     (12, "第12组_会计科普考点版",T12, B12, P12, False, False, False,
