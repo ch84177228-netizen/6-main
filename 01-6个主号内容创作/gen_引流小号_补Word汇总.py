@@ -7,6 +7,9 @@ from docx.enum.text import WD_BREAK
 
 BASE = "/home/user/6-main/01-6个主号内容创作/引流小号_发布文案"
 
+# Word汇总中需删除的话题标签（txt保持不变）
+DROP_TAGS = {"#财会", "#备考日记", "#上班族备考", "#考前冲刺"}
+
 # 全部批次：(起, 止)
 BATCHES = [
     (22, 28), (29, 35), (36, 42), (43, 49), (50, 56),
@@ -32,7 +35,9 @@ def parse_txt(content):
         if line.startswith("正文："):
             section = "body"; continue
         if line.startswith("话题："):
-            topic = line[len("话题："):].strip()
+            raw = line[len("话题："):].strip()
+            tags = [t for t in raw.split() if t not in DROP_TAGS]
+            topic = " ".join(tags)
             section = "topic"; continue
         if line.startswith("时间：") or line.startswith("账号："):
             section = "other"; continue
