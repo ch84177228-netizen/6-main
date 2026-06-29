@@ -874,13 +874,13 @@ def gen_txts():
         folder = os.path.join(BASE, "01-主题", gname)
         print(f"\n【第{n}组】{gname}")
         if dy_acc:
-            fn = f"1_抖音_{dy_acc.split('|')[-1]}.txt"
+            fn = f"07_抖音_{dy_acc.split('|')[-1]}.txt"
             write_txt(os.path.join(folder, fn), title, body, topics, dy_acc)
         if xhs_acc:
-            fn = f"2_小红书_{xhs_acc.split('|')[-1]}.txt"
+            fn = f"06_小红书_{xhs_acc.split('|')[-1]}.txt"
             write_txt(os.path.join(folder, fn), title, body, topics, xhs_acc)
         if spy_acc and has_video:
-            fn = f"4_视频号_{spy_acc.split('|')[-1]}.txt"
+            fn = f"04_视频号_{spy_acc.split('|')[-1]}.txt"
             write_txt(os.path.join(folder, fn), title, body, topics, spy_acc)
         if gzh_acc and has_wechat:
             fn = f"13_公众号_{gzh_acc.split('|')[-1]}.txt"

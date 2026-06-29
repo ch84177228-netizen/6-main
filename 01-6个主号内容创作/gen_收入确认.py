@@ -225,10 +225,10 @@ for idx,folder,title,body,topics,has_dy,has_sp,has_gzh,dy,xhs,sp,gzh in groups:
     fpath = os.path.join(BASE,"01-主题",folder)
     print(f"\n【第{idx}组】{folder}")
     if has_dy and dy:
-        write_txt(os.path.join(fpath,f"1_抖音_{dy.split('|')[1]}.txt"),title,body,topics,dy)
-    write_txt(os.path.join(fpath,f"2_小红书_{xhs.split('|')[1]}.txt"),title,body,topics,xhs)
+        write_txt(os.path.join(fpath,f"07_抖音_{dy.split('|')[1]}.txt"),title,body,topics,dy)
+    write_txt(os.path.join(fpath,f"06_小红书_{xhs.split('|')[1]}.txt"),title,body,topics,xhs)
     if has_sp and sp:
-        write_txt(os.path.join(fpath,f"4_视频号_{sp.split('|')[1]}.txt"),title,body,topics,sp)
+        write_txt(os.path.join(fpath,f"04_视频号_{sp.split('|')[1]}.txt"),title,body,topics,sp)
     if has_gzh and gzh:
         write_txt(os.path.join(fpath,f"13_公众号_{gzh.split('|')[1]}.txt"),title,body,topics,gzh)
 

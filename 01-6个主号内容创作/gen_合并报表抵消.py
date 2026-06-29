@@ -287,18 +287,18 @@ for idx, folder, title, body, topics, has_dy, has_sp, has_gzh, dy_acct, xhs_acct
     # 抖音
     if has_dy and dy_acct:
         dy_name = dy_acct.split("|")[1]
-        p = os.path.join(fpath, f"1_抖音_{dy_name}.txt")
+        p = os.path.join(fpath, f"07_抖音_{dy_name}.txt")
         write_txt(p, title, body, topics, dy_acct)
 
     # 小红书
     xhs_name = xhs_acct.split("|")[1]
-    p = os.path.join(fpath, f"2_小红书_{xhs_name}.txt")
+    p = os.path.join(fpath, f"06_小红书_{xhs_name}.txt")
     write_txt(p, title, body, topics, xhs_acct)
 
     # 视频号（第1-6组才有）
     if has_sp and sp_acct:
         sp_name = sp_acct.split("|")[1]
-        p = os.path.join(fpath, f"4_视频号_{sp_name}.txt")
+        p = os.path.join(fpath, f"04_视频号_{sp_name}.txt")
         write_txt(p, title, body, topics, sp_acct)
 
     # 公众号（第1-4组才有）
@@ -312,11 +312,11 @@ print("生成 02-会计科普 & 06-公务员 txts...")
 print("=" * 60)
 
 # 02-会计科普
-p = os.path.join(BASE, "02-会计科普", "2_小红书_胡志兰手机.txt")
+p = os.path.join(BASE, "02-会计科普", "06_小红书_胡志兰手机.txt")
 write_txt(p, T_KP, B_KP, P_KP, "06红书店铺|胡志兰手机")
 
 # 06-公务员
-p = os.path.join(BASE, "06-公务员", "2_小红书_考公学姐.txt")
+p = os.path.join(BASE, "06-公务员", "06_小红书_考公学姐.txt")
 write_txt(p, T_GW_XHS, B_GW_XHS, P_GW_XHS, "06红书店铺|考公学姐")
 
 p = os.path.join(BASE, "06-公务员", "13_公众号_05粉色手机.txt")
