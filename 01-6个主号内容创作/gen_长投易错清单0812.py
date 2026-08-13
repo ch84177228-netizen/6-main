@@ -33,7 +33,8 @@ def make_zip():
             for file in files:
                 full = os.path.join(root, file)
                 zf.write(full, os.path.relpath(full, BASE))
-        for fn in ["长投易错清单_Word1_账号1到6.docx", "长投易错清单_Word2_账号7到12.docx"]:
+        for fn in ["长投易错清单_Word1_账号1到3.docx", "长投易错清单_Word2_账号4到6.docx",
+                   "长投易错清单_Word3_账号7到9.docx", "长投易错清单_Word4_账号10到12.docx"]:
             full = os.path.join(BASE, fn)
             if os.path.exists(full): zf.write(full, fn)
     return zip_path
@@ -481,9 +482,12 @@ def gen_txts():
 
 def gen_words():
     print("\n=== 生成Word ===")
+    # 固定拆成4个Word，每个3个账号（长期规则，2026-08-12起生效）
     for wnum, content, fname in [
-        (1, "\n\n".join([W1,W2,W3,W4,W5,W6]), "长投易错清单_Word1_账号1到6.docx"),
-        (2, "\n\n".join([W7,W8,W9,W10,W11,W12]), "长投易错清单_Word2_账号7到12.docx"),
+        (1, "\n\n".join([W1,W2,W3]), "长投易错清单_Word1_账号1到3.docx"),
+        (2, "\n\n".join([W4,W5,W6]), "长投易错清单_Word2_账号4到6.docx"),
+        (3, "\n\n".join([W7,W8,W9]), "长投易错清单_Word3_账号7到9.docx"),
+        (4, "\n\n".join([W10,W11,W12]), "长投易错清单_Word4_账号10到12.docx"),
     ]:
         doc = Document()
         parts = content.split("\n\n已选标题：")
