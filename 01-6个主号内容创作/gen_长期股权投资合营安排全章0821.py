@@ -33,7 +33,8 @@ def make_zip():
             for file in files:
                 full = os.path.join(root, file)
                 zf.write(full, os.path.relpath(full, BASE))
-        for fn in ["长投合营安排全章_Word1_账号1到6.docx", "长投合营安排全章_Word2_账号7到12.docx"]:
+        for fn in ["长投合营安排全章_Word1_账号1到3.docx", "长投合营安排全章_Word2_账号4到6.docx",
+                   "长投合营安排全章_Word3_账号7到9.docx", "长投合营安排全章_Word4_账号10到12.docx"]:
             full = os.path.join(BASE, fn)
             if os.path.exists(full): zf.write(full, fn)
     return zip_path
@@ -781,8 +782,10 @@ def gen_txts():
 def gen_words():
     print("\n=== 生成Word ===")
     for wnum, content, fname in [
-        (1, "\n\n".join([W1,W2,W3,W4,W5,W6]), "长投合营安排全章_Word1_账号1到6.docx"),
-        (2, "\n\n".join([W7,W8,W9,W10,W11,W12]), "长投合营安排全章_Word2_账号7到12.docx"),
+        (1, "\n\n".join([W1,W2,W3]), "长投合营安排全章_Word1_账号1到3.docx"),
+        (2, "\n\n".join([W4,W5,W6]), "长投合营安排全章_Word2_账号4到6.docx"),
+        (3, "\n\n".join([W7,W8,W9]), "长投合营安排全章_Word3_账号7到9.docx"),
+        (4, "\n\n".join([W10,W11,W12]), "长投合营安排全章_Word4_账号10到12.docx"),
     ]:
         doc = Document(); add_word_content(doc, content)
         os.makedirs(BASE, exist_ok=True)
